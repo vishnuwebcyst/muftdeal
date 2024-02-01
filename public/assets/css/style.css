@@ -1,0 +1,131 @@
+.footer-icon {
+    color: #FF0032 !important;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.text-color {
+    color: #FF0032 !important;
+ }
+
+.navbar {
+    position: sticky !important;
+    top: 0;
+}
+
+.scroll-top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 10px;
+    background-color: #FF0032;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out !important;
+}
+
+#subscribebtn {
+    z-index: 1;
+    right: 5px;
+    bottom: 2px;
+}
+
+.left-inner-addon {
+    position: relative;
+}
+
+.left-inner-addon input {
+    padding-left: 35px !important;
+}
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 12px 12px;
+    pointer-events: none;
+}
+
+.head-btn {
+    background-color: #FF0032 !important;
+    color: white !important;
+    border-radius: 30px !important;
+}
+
+.footer-btn {
+    background-color: #FF0032 !important;
+    color: white !important;
+}
+
+.view-btn {
+    background-color: #FFCDD7 !important;
+    color: red !important;
+    border-radius: 30px !important;
+}
+
+.view-btn:hover {
+    background-color: #FF0032 !important;
+    color: white !important;
+}
+
+ul>li>a:hover {
+    color: red !important;
+}
+
+.sticky-top {
+    position: sticky !important;
+    top: 0 !important;
+}
+
+.img-wrapper {
+    overflow: hidden;
+}
+
+.restaurant-card {
+    height: 350px !important;
+}
+
+
+.collapse {
+    transition: height 10s !important;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: red;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-item:hover::before {
+    width: 100%;
+}
+
+.footer-links:hover {
+    color: #FF0032 !important;
+    font-size: 18px;
+}
+
+.owl-carousel .owl-item img {
+    display: block;
+    width: 100%;
+    height: 350px;
+}
+
+@media (max-width:640px) {
+    .owl-carousel .owl-item img {
+        display:  block;
+        width: 100%;
+        height: auto !important;
+     }
+
+}
