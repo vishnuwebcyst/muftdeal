@@ -9,29 +9,28 @@
                 <div class="row">
                     <div class="">
                         <div class="card">
+                            <div class="card-header  ">
+                                 <a href="{{ route('food-type.index', ['restaurant_id' => request('restaurant_id')]) }}"
+                                    class="btn btn-primary float-end">View Category</a>
+                                <h4 class='text-center '>Add New Category </h4>
 
-                            <h4 class='text-center py-4'>Add Item Type</h4>
+                            </div>
+                            {{-- <h4 class='text-center py-4'>Add New Category </h4> --}}
                             <div class=" col-lg-8 col-12 mx-auto">
                                 <form action="{{ route('food-type.store') }}" method='post' class="px-3" >
                                     @csrf
-                                    <input class="form-control" type="hidden" name="restaurant_id"
-                                        value={{ $restaurant_id }}>
+                                    <input class="form-control" type="hidden" name="restaurant_id" value={{ $restaurant_id }}>
 
                                     <div class="form-group">
-                                        <label for="example-search-input" class="form-control-label">Category  Type</label>
-                                        <input class="form-control" type="text" name="food_type"
-                                            placeholder="Enter Menu Type" required>
+                                        <label for="example-search-input" class="form-control-label">Category Type</label>
+                                        <input class="form-control" type="text" name="food_type" placeholder="Enter Category Type" required>
                                     </div>
-
-
-
                                     <div id='menu_type'>
                                         <div class="form-group">
                                             <label for="example-search-input" class="form-control-label">category Price</label>
                                             <input class="form-control" type="text" name="item_type[]" required
                                                 placeholder="Enter Food Price">
                                         </div>
-
                                     </div>
                                     <div>
 
@@ -50,7 +49,7 @@
                                         <input class="form-control" type="text" name="item_type[]" placeholder="Enter Food Type">
                                     </div> --}}
 
-                                    <button type="submit" class='btn btn-success'>Add</button>
+                                    <button type="submit" class='btn btn-success'>Submit</button>
                                 </form>
                             </div>
                         </div>

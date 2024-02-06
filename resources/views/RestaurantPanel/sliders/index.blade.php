@@ -34,7 +34,7 @@
                                                 data-image="{{ asset($background->image) }}"
                                                 data-delete-url="{{ route('background.destroy', ['background' => $background->id]) }}"
                                                 class="border-0 text-white bg-transparent rounded-pill open-modal"
-                                                title="Delete background image">
+                                                title="View Image">
                                                 <i class="fas fa-eye  fs-4"></i>
                                             </button>
                                             </div>

@@ -149,8 +149,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('restaurant-home.index') }}">
-                        <i class="fas fa-home"></i><span class="nav-link-text ms-1">Add upi</span>
+                    <a class="nav-link" href="{{ route('billing.index') }}">
+                        <i class="fas fa-file-invoice"></i><span class="nav-link-text ms-1">Billing</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -268,6 +268,7 @@
         integrity="sha512-DI3rPuZDcpH/mSGyN22erN5QFnhl760f50/te7FTIYxodEF8jJnSFnfnmG/c+osmIQemvUrnBtxnMpNdzvx1/g=="
         data-cf-beacon='{"rayId":"7e69ebdb090c2bae","version":"2023.4.0","r":1,"b":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}'
         crossorigin="anonymous"></script> --}}
+
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v2cb3a2ab87c5498db5ce7e6608cf55231689030342039"></script>
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/js/owl.carousel.min.js') }}"></script>

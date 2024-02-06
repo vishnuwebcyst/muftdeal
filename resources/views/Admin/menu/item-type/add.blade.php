@@ -10,7 +10,7 @@
                     <div class="">
                         <div class="card">
 
-                            <h4 class='text-center py-4'>Add Menu Type</h4>
+                            <h4 class='text-center py-4'>Add </h4>
                             <div class=" col-lg-8 col-12 mx-auto">
                                 <form action="{{ route('item-type.store') }}" method='post' class="px-3">
                                     @csrf
@@ -30,7 +30,7 @@
                             <label for="example-search-input" class="form-control-label">Large Title</label>
                             <input class="form-control" type="text" name="title[]">
                         </div> --}}
-                                    <button type="submit" class='btn btn-primary'>Add</button>
+                                    <button type="submit" class='btn btn-primary'>Submit</button>
                                 </form>
                             </div>
                         </div>

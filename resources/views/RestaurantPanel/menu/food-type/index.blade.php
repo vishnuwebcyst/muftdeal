@@ -113,7 +113,7 @@
                                                             <div class="modal-body p-0">
                                                                 <div class="card card-plain">
                                                                     <div class="card-header text-center">
-                                                                        <h4>Edit Menu Type</h4>
+                                                                        <h4>Edit Category Type</h4>
                                                                     </div>
                                                                     <div class="card-body pb-3">
 

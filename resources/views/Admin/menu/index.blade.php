@@ -14,7 +14,7 @@
 
                             <div class="card-header d-flex menu_btns">
                                 <a href="{{ route('menu.create', ['restaurant_id' => $data->id]) }}"
-                                    class="btn btn-primary ">Add Menu</a>
+                                    class="btn btn-primary ">Add Product</a>
                                 {{-- <a href="{{ route('item-type.index', ['restaurant_id' => $data->id]) }}"
                                     class="btn btn-primary ms-3"> Menu Types</a> --}}
                                 <a href="{{ route('food-type.index', ['restaurant_id' => $data->id]) }}"

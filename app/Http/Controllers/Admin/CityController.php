@@ -41,11 +41,15 @@ class CityController extends Controller
     public function store(Request $request)
     {
         //
+        $file = $request->file('image');
+        $filename = $file->getClientOriginalName();
+        $file->move(public_path('uploads/images/'), $filename);
         $city = new City();
         $city->city_name = $request->city_name;
+        $city->image = $filename;
         $city->save();
 
-        return redirect()->route('restaurant.index')->with('success', 'City added successfully');
+        return redirect()->route('all-city.index')->with('success', 'City added successfully');
     }
 
     /**
@@ -80,8 +84,17 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $imaged = City::where('id', $request->id)->first();
+        if ($request->image) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('uploads/images/'), $filename);
+        } else {
+            $filename = $imaged->image;
+        }
          City::where('id', $request->city_id)->update([
             'city_name' => $request->city_name,
+            'image' => $filename,
         ]);
         return redirect()->back()->with('success', 'City Name Updated');
     }
@@ -95,6 +108,12 @@ class CityController extends Controller
     public function destroy($id)
     {
         //
+        $image = City::where('id', $id)->first();
+        $image_path = 'uploads/images/'. $image->image;
+
+        if (file_exists($image_path)) {
+@unlink($image_path);
+        }
 
         City::where('id', $id)->delete();
         return redirect()->back()->with('success', 'City deleted successfully');

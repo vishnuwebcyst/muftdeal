@@ -63,7 +63,7 @@
                                                 <div class="modal-body p-0">
                                                     <div class="card card-plain">
                                                         <div class="card-header text-center">
-                                                            <h4>Edit Menu</h4>
+                                                            <h4>Edit Product</h4>
                                                         </div>
                                                         <div class="card-body pb-3">
 
@@ -72,7 +72,7 @@
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                <label>Item Name</label>
+                                                                <label>Product Name</label>
                                                                 <div class="input-group mb-3">
                                                                     <input type="text" name="item_name"
                                                                         class="form-control"

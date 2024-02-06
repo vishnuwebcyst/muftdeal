@@ -25,7 +25,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $sliders = Slider::where('restaurant_id', '==', 0)->get();
-        $restaurants = restaurant::where('is_verified', 1)->get();
+        // $restaurants = restaurant::where('is_verified', 1)->get();
+        $restaurants = restaurant::where('is_verified', 1)->orderBy("id")->when($request->search, function ($q) use ($request) {
+            $q->where("restaurant_name", "like", "%$request->search%");
+
+         })->paginate(50);
+
         $restaurants->map(function ($data) {
             $details =  Rating::where('restaurant_id', $data->id)->count();
 
@@ -38,13 +43,29 @@ class HomeController extends Controller
 
             return $data;
         });
-        $restaurants = $restaurants->sortByDesc('rating');
+        // $restaurants = $restaurants->sortByDesc('rating');
+        $cityName = $request->input('city_name');
 
+        if ($cityName) {
+            // $restaurants = Restaurant::where('city_name', $cityName)
+            //     ->where('is_verified', 1)
+            //     ->get();
+                $restaurants = restaurant::where('city_name', $cityName)->Where('is_verified', 1)->orderBy("id")->when($request->search, function ($q) use ($request) {
+                    $q->where("restaurant_name", "like", "%$request->search%");
+                 })->paginate(50);
+
+            return response()->json($restaurants);
+        }
+        // $citys = City::orderBy('id', 'asc')->get();
+        $cities = City::orderBy('city_name', 'asc')->get();
 
         if (session()->has('city_name')) {
-            $restaurants = restaurant::Where("city_name", session('city_name'))->Where('is_verified', 1)->get();
-        }
-        return view('welcome', compact('restaurants', 'sliders'));
+            // $restaurants = restaurant::Where("city_name", session('city_name'))->Where('is_verified', 1)->get();
+            $restaurants = restaurant::where('city_name', session('city_name'))->orderBy("id")->when($request->search, function ($q) use ($request) {
+                $q->where("restaurant_name", "like", "%$request->search%");
+             })->get();
+         }
+        return view('welcome', compact('restaurants', 'sliders', 'cities'));
     }
 
     public function search_bar(Request $request)
@@ -67,6 +88,18 @@ class HomeController extends Controller
         $sliders = Slider::where('restaurant_id', '==', 0)->get();
 
         return view('front-end.contact', compact('sliders'));
+    }
+
+    public function select_city(Request $request){
+
+        // $restaurants = restaurant::Where("city_name", $request->city_name)->Where('is_verified', 1)->get();
+        $restaurants = restaurant::where('city_name',  $request->city_name)->where('is_verified', 1)->when($request->search, function ($q) use ($request) {
+            $q->where("restaurant_name", "like", "%$request->search%");
+         })->get();
+        session(['city_name' => $request->city_name]);
+
+        return response()->json(['restaurants' => $restaurants]);
+
     }
     /**
      * Show the application dashboard.

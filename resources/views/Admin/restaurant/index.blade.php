@@ -134,7 +134,7 @@
                                                                     <div class="modal-header">
                                                                         <h4>Menu Qr Code</h4>
                                                                         <a data-bs-dismiss="modal" aria-label="Close">
-                                                                            <i class="fas fa-times"></i>
+                                                                            <i class="fas fa-times h4"></i>
                                                                         </a>
 
                                                                     </div>
@@ -168,7 +168,7 @@
                                                                     <div class="modal-header">
                                                                         {{-- <h4>Menu Qr Code</h4> --}}
                                                                         <a class="ms-auto" data-bs-dismiss="modal" aria-label="Close">
-                                                                            <i class="fas fa-times"></i>
+                                                                            <i class="fas fa-times h4"></i>
                                                                         </a>
                                                                     </div>
                                                                     <div class="card-body pb-3 mx-auto text-center">

@@ -125,19 +125,19 @@ class RestaurantLoginController extends Controller
 
             return redirect()->back()->withErrors($validator)->with('error', 'There were validation errors. Please fix them and try again.');
         }
-        if ($request->image) {
+        if (isset($request->image)) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $file->move(public_path('uploads/images/'), $filename);
         } else {
             $filename = $imaged->image;
         }
-        if ($request->main_image) {
-            $main_file = $request->file('image');
+        if (isset($request->main_image)) {
+            $main_file = $request->file('main_image');
             $main_filename = 'thumbnail_' .  $main_file->getClientOriginalName();
             $main_file->move(public_path('uploads/images/'), $main_filename);
         } else {
-            $filename = $imaged->image;
+            $main_filename = $imaged->thumbnail;
         }
 
         restaurant::where('id', $request->id)->update([
@@ -149,6 +149,7 @@ class RestaurantLoginController extends Controller
             'open_time' => $request->open_time,
             'close_time' => $request->close_time,
             'location' => $request->location,
+            'description' => $request->description,
             'password' =>  Hash::make($request->password),
             'url' => $request->url,
         ]);

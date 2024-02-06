@@ -23,7 +23,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-end">
                             <a href="{{ route('food-type.create', ['restaurant_id' => request('restaurant_id')]) }}"
-                                class="btn btn-primary ms-3">Add Food Type</a>
+                                class="btn btn-primary ms-3">Add New Category</a>
 
                         </div>
                         <div class="table-responsive">
@@ -31,8 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category Image</th>
-                                        <th>Category Name</th>
+                                         <th>Category Name</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -44,8 +43,7 @@
                                         @endphp
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td><img src="{{ asset('uploads/images/' . $restaurant->image) }}" class="cstm_imagerestaurant" alt="Restaurant Image"></td>
-                                            <td>{{ $restaurant->food_type }}</td>
+                                             <td>{{ $restaurant->food_type }}</td>
                                             <td>
                                                 <div class='d-flex'><a data-bs-toggle="modal"
                                                         data-bs-target="#myModal{{ $restaurant->id }}" class=''><i
@@ -70,7 +68,7 @@
                                                             <div class="modal-body p-0">
                                                                 <div class="card card-plain">
                                                                     <div class="card-header text-center">
-                                                                        <h4>Edit Menu Type</h4>
+                                                                        <h4>Edit Category  Type</h4>
                                                                     </div>
                                                                     <div class="card-body pb-3">
 

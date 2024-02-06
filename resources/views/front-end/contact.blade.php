@@ -35,7 +35,7 @@
                         </div>
                         <div class="text">
                             <h4>Phone Number</h4>
-                            <p>(+91) 98880 49484</p>
+                            <p>(+91) 99509 89567</p>
                         </div>
                     </div>
                 </div>

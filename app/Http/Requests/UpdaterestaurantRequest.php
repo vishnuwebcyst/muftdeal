@@ -33,6 +33,7 @@ class UpdaterestaurantRequest extends FormRequest
             'url' => 'required',
             'open_time' => 'required',
             'close_time' => 'required',
+            'description' => 'max:254',
          ];
     }
 }

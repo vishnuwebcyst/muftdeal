@@ -113,7 +113,13 @@
                                         <small class="text-danger">{{ $errors->first('restaurant_type') }}</small>
                                     @endif
                                 </div>
-
+                                <div class='form-group mb-3'>
+                                    <label for='description' class='form-control-label'>Enter Description</label>
+                                    <textarea name="description" id='description' class='form-control' placeholder="Enter Description"></textarea>
+                                    @if ($errors->has('description'))
+                                            <small class="text-danger">{{ $errors->first('description') }}</small>
+                                        @endif
+                                </div>
                                 <button type="submit" class='btn btn-primary'>Add</button>
                             </form>
                         </div>

@@ -24,6 +24,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>City Name</th>
+                                        <th>City Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,7 +42,7 @@
                                                             <div class="card-body pb-3">
                                                                  <form role="form text-left"
                                                                     action="{{ route('all-city.update', [$city->id]) }}"
-                                                                    method="POST">
+                                                                    method="POST"  enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <input type="hidden" name="city_id"
@@ -51,6 +52,16 @@
                                                                         <input type="text" name="city_name"
                                                                             class="form-control"
                                                                             value="{{ $city->city_name }}">
+                                                                    </div>
+                                                                    <div class="mb-3">
+
+                                                                        <label>City Name</label>
+                                                                        <div class="input-group mb-3">
+                                                                            <input type="file" name="image" class="form-control" value="{{ $city->image }}">
+                                                                        </div>
+                                                                            @if(isset($city->image))
+                                                                            <img src="{{ asset('uploads/images/' . $city->image) }}" class="cstm_imagerestaurant" alt="City image">
+                                                                            @endif
                                                                     </div>
                                                                     <button type="submit"
                                                                         class="btn btn-primary">Update</button>
@@ -64,6 +75,11 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $city->city_name }}</td>
+                                            <td>
+                                                @if(isset($city->image))
+                                                <img src="{{ asset('uploads/images/' . $city->image) }}" class="cstm_imagerestaurant" alt="City image">
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="d-flex"> <a class=" mx-2 btn btn-primary" data-bs-toggle="modal"
                                                         data-bs-target="#myModal{{ $city->id }}"><i

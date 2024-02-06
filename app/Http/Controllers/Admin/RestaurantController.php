@@ -79,6 +79,7 @@ class RestaurantController extends Controller
 
         $data->show_pass = $request->password;
         $data->phone = $request->phone;
+        $data->description = $request->description;
         $data->is_verified = 1;
         $data->open_time = $request->open_time;
         $data->close_time = $request->close_time;
@@ -130,21 +131,20 @@ class RestaurantController extends Controller
     public function update(UpdaterestaurantRequest $request, restaurant $restaurant)
     {
         $imaged = restaurant::where('id', $request->id)->first();
-        if ($request->image) {
+        if (isset($request->image)) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $file->move(public_path('uploads/images/'), $filename);
         } else {
             $filename = $imaged->image;
         }
-        if ($request->main_image) {
+        if (isset($request->main_image)) {
             $main_file = $request->file('main_image');
             $main_filename = 'thumbnail_'. $main_file->getClientOriginalName();
             $main_file->move(public_path('uploads/images/'), $main_filename);
         } else {
-            $main_filename = $imaged->main_image;
+            $main_filename = $imaged->thumbnail;
         }
-
         restaurant::where('id', $request->id)->update([
             'restaurant_name' => $request->restaurant_name,
             'restaurant_type' => $request->restaurant_type,
@@ -153,6 +153,7 @@ class RestaurantController extends Controller
             'thumbnail' => $main_filename,
             'open_time' => $request->open_time,
             'close_time' => $request->close_time,
+            'description' => $request->description,
             'phone' => $request->phone,
             'location' => $request->location,
              'password' => Hash::make($request->password),

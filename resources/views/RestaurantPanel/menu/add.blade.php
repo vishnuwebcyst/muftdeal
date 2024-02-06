@@ -11,7 +11,12 @@
                 <div class="row">
                     <div class="">
                         <div class="card">
-                            <h4 class='text-center py-4'>Add New Product</h4>
+                            <div class="card-header  ">
+                                <a href="{{ route('food-types.create', ['restaurant_id' => request('restaurant_id')]) }}"
+                                    class="btn btn-primary float-end">Add New Category </a>
+                                <h4 class='text-center '>Add New Product</h4>
+
+                            </div>
 
 
                             <div class=" col-lg-8 col-12 mx-auto">
@@ -20,9 +25,9 @@
                                     <input class="form-control" type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">
 
                                     <div class="form-group">
-                                        <label for="food_id" class="form-control-label">Food Type</label>
+                                        <label for="food_id" class="form-control-label">Category Name</label>
                                         <select class="form-select shadow-none" id="food_id" name="food_id" aria-label="Default select example" required>
-                                            <option disabled selected>Select Food type</option>
+                                            <option disabled selected>Select Category Name</option>
                                             @foreach ($data as $type)
                                                 <option value="{{ $type->id }}">{{ $type->food_type }}</option>
                                             @endforeach
@@ -33,8 +38,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="item_name" class="form-control-label">Item Name</label>
-                                        <input class="form-control" type="text" name="item_name" placeholder="Enter Item Name">
+                                        <label for="item_name" class="form-control-label">Product  Name</label>
+                                        <input class="form-control" type="text" name="item_name" placeholder="Enter Product Name">
                                         @if ($errors->has('item_name'))
                                             <small class="text-danger">{{ $errors->first('item_name') }}</small>
                                         @endif
@@ -43,7 +48,7 @@
                                     <div class="price-fields" style="display: none;">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Add</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
 
 
                                 </form>

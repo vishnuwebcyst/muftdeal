@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <style>
         #selectedImageContainer {
             background-repeat: repeat;
@@ -118,8 +119,7 @@
     </section>
     <main class="main-content position-relative border-radius-lg ">
         <div class="container">
-            <p class='bg-dark text-white text-center'>Designed By <a href='https://www.websyst.in/'
-                    class='text-primary text-decoration-none'>Websyst</a> </p>
+            {{-- <p class='bg-dark text-white text-center'>Designed By <a href='https://www.websyst.in/' class='text-primary text-decoration-none'>Websyst</a> </p> --}}
             {{-- @auth
                 @if ($menu->rating > 0)
                     <p>You have already submitted a review with a rating of {{ $menu->rating }}.</p>
@@ -129,13 +129,13 @@
                 <i class="fas fa-star"></i> write a review </button> --}}
 
             <div class="">
-                <div class="row p-lg-5">
-                    <div class="col-lg-8 col-md-10 mt-3 mx-auto">
+                <div class="row p-lg-2">
+                    <div class="col-lg-8 col-md-10  mx-auto">
 
                         <div class="menu shadow-lg" id="selectedImageContainer">
                             <div class="">
                                 <div class=" px-lg-5 px-sm-0 px-md-2 ">
-                                    <div class="   px-sm-0 px-md-2 py-5 ">
+                                    <div class="   px-sm-0 px-md-2 py-3 ">
                                         @if (isset($data->offers))
                                             <span class='h4 border-bottom'>Offers</span>
                                             <marquee width="100%" direction="left" height="100px" class='h4 text-danger'>
@@ -150,7 +150,7 @@
                                                 {!! QrCode::size(100)->backgroundColor(255, 255, 255)->margin(2)->generate(url('/', [base64_encode($data->id)])) !!}
                                             </div>
                                         </div>
-                                        <p class="text-center restaurant_name fs-1 fw-bold py-3">
+                                        <p class="text-center restaurant_name fs-1 fw-bold m-0">
                                             {{ $data->restaurant_name }}
                                         </p>
                                         <?php
@@ -160,17 +160,22 @@
                                             $number = $data->menu_number;
                                         }
                                         ?>
-                                        <p class="text-center restaurant_name  fs-3 ">For order call now :
+                                       @if(request('fooditem') == '')
+                                       <p>Not Found</p>
+                                       @else
+                                        <p class="text-center restaurant_name  fs-3 m-0 ">For order call now :
                                             {{ $number }} </p>
-                                        @if ($data->open_time != null)
+
                                             <p class='text-center   fs-5 '>Opening Time : {{ $data->open_time }} to
                                                 {{ $data->close_time }}</p>
-                                        @endif
+
+
                                         <div class="text-center">
                                             <a href="tel:+91 {{ $number }}" class="btn head-btn fw-bold">call now</a>
                                         </div>
+                                        @endif
                                     </div>
-                                    <form action="" method="get" class='col-sm-12 col-lg-6 p-2 mx-auto'>
+                                    <form action="" method="get" class='col-sm-12 col-lg-6 px-2 mx-auto'>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search Food"
                                                 name="search">
@@ -230,9 +235,19 @@
                                         </table>
                                     </div>
                                     <div class="py-5 text-center">
+                                        @if(isset($data->description))
+                                        <h4 class='text-start'>Description : {{ $data->description }}</h4>
+                                        @endif
+
                                         <h4 class="m-0 menu-font">If you want to order call this number :
                                             {{ $number }}</h4>
                                         <h4 class="m-0 menu-font">Location : {{ $data->location }}</h4>
+
+                                        {{-- @if(request('fooditem/Mg=='))
+                                        <h4 class="m-0 menu-font">If you want to order call this number :
+                                            {{ $number }}</h4>
+                                        <h4 class="m-0 menu-font">Location : {{ $data->location }}</h4>
+                                        @endif --}}
                                     </div>
                                 </div>
                                 <div class=" container bg-dark text-white py-3">
@@ -354,14 +369,9 @@
             // Handle modal close event
             $('#exampleModal').on('hide.bs.modal', function(e) {
                 var form = $('#myForm');
-
-                // Check if the form is valid
                 if (!form[0].checkValidity()) {
-                    // Prevent the modal from closing
                     e.preventDefault();
                     e.stopPropagation();
-
-                    // Highlight form fields with validation errors
                     form.addClass('was-validated');
                 }
             });

@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ItemTypeController;
 use App\Http\Controllers\Admin\MenuItemsController;
 use App\Http\Controllers\Admin\FoodTypeController;
 use App\Http\Controllers\Front\RatingController;
+use App\Http\Controllers\RestaurantPanel\BillingsController;
 use App\Http\Controllers\RestaurantPanel\RestaurantItem;
 use App\Http\Controllers\RestaurantPanel\SliderController as RestaurantSlider;
 use App\Http\Controllers\RestaurantPanel\ItemTypeController as ItemTypeControllers;
@@ -42,6 +43,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post('restaurant-check', [LoginController::class, 'restaurant_details_check'])->name('restaurant-check');
 Route::post('restaurant-regiter', [RestaurantLoginController::class, 'restaurant_register_post'])->name('restaurant-regiter');
+Route::post('/select_city', [HomeController::class, 'select_city'])->name('select_city');
 
 // Route::post('search-bar', [HomeController::class, 'search_bar'])->name('search-bar');
 Auth::routes();
@@ -77,6 +79,8 @@ Route::prefix('restaurant-panel')->middleware('restaurant_check')->group(functio
     Route::post('background_post', [RestaurantMenu::class, 'background_post'])->name('restaurant.background_post');
     Route::post('background_delete/{id}', [RestaurantMenu::class, 'background_delete'])->name('restaurant.background_delete');
     Route::post('remove_background', [RestaurantMenu::class, 'remove_background'])->name('restaurant.remove_background');
+    Route::resource('billing', BillingsController::class);
+    Route::get('invoice/{id}', [BillingsController::class, 'invoice'])->name('restaurant.invoice');
 
 
 });

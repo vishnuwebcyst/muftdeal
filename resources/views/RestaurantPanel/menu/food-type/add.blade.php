@@ -9,14 +9,20 @@
                 <div class="row">
                     <div class="">
                         <div class="card">
+                            <div class="card-header  ">
+                                <a href="{{ route('food-types.index', ['restaurant_id' => request('restaurant_id')]) }}"
+                                    class="btn btn-primary float-end">View categories </a>
+                                <h4 class='text-center '>Add New Category</h4>
 
-                            <h4 class='text-center py-4'>Add category Type</h4>
+                            </div>
+
+                            {{-- <h4 class='text-center py-4'>Add Category Type</h4> --}}
                             <div class=" col-lg-8 col-12 mx-auto">
                                 <form action="{{ route('food-types.store') }}" method='post' class="px-3">
                                     @csrf
                                     <input class="form-control" type="hidden" name="restaurant_id" value={{ $restaurant_id }}>
                                     <div class="form-group">
-                                        <label for="example-search-input" class="form-control-label">Category name</label>
+                                        <label for="example-search-input" class="form-control-label">Category Name</label>
                                         <input class="form-control" type="text" name="food_type" placeholder="Enter Menu Type" required>
                                     </div>
 

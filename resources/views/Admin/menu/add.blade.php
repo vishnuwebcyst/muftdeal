@@ -9,8 +9,12 @@
                 <div class="row">
                     <div class="">
                         <div class="card">
+                            <div class="card-header  ">
+                                <a href="{{ route('food-type.create', ['restaurant_id' => request('restaurant_id')]) }}"
+                                    class="btn btn-primary float-end">Add New Category </a>
+                                <h4 class='text-center '>Add Product</h4>
 
-                            <h4 class='text-center py-4'>Add Menu</h4>
+                            </div>
                             <div class=" col-lg-8 col-12 mx-auto">
                                 <form action="{{ route('menu.store') }}" method='post' class="px-3"
                                     enctype="multipart/form-data">
@@ -19,9 +23,10 @@
                                         value={{ $restaurant_id }}>
 
                                     <div class="form-group">
-                                        <label for="food_id" class="form-control-label">Food Type</label>
-                                        <select class="form-select shadow-none" id="food_id" name="food_id" aria-label="Default select example" required>
-                                            <option disabled selected>Select Food type</option>
+                                        <label for="food_id" class="form-control-label">Category Type</label>
+                                        <select class="form-select shadow-none" id="food_id" name="food_id"
+                                            aria-label="Default select example" required>
+                                            <option disabled selected>Select category type</option>
                                             @foreach ($data as $type)
                                                 <option value="{{ $type->id }}">{{ $type->food_type }}</option>
                                             @endforeach
@@ -33,15 +38,16 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="example-search-input" class="form-control-label">Item Name</label>
-                                        <input class="form-control" type="text" name="item_name" placeholder="Enter item name" required>
+                                        <label for="example-search-input" class="form-control-label">Product Name</label>
+                                        <input class="form-control" type="text" name="item_name"
+                                            placeholder="Enter item name" required>
                                         @if ($errors->has('item_name'))
                                             <small class="text-danger">{{ $errors->first('item_name') }}</small>
                                         @endif
                                     </div>
 
-                                <div class="price-fields" style="display: none;">
-                                </div>
+                                    <div class="price-fields" style="display: none;">
+                                    </div>
 
                                     {{-- <div class="form-group">
                                         <label for="example-search-input" class="form-control-label">Small Item
@@ -58,7 +64,7 @@
                                             Price</label>
                                         <input class="form-control" type="text" name="large_price">
                                     </div> --}}
-                                    <button type="submit" class='btn btn-primary'>Add</button>
+                                    <button type="submit" class='btn btn-primary'>Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -67,32 +73,34 @@
             </div>
         </main>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $('#food_id').change(function () {
-                                                var foodType = $(this).val();
-                                                var itemTypes = {!! json_encode($data->pluck('item_type', 'id')->all(), JSON_HEX_TAG) !!};
+        <script>
+            $(document).ready(function() {
+                $('#food_id').change(function() {
+                    var foodType = $(this).val();
+                    var itemTypes = {!! json_encode($data->pluck('item_type', 'id')->all(), JSON_HEX_TAG) !!};
 
-                                                $('.price-fields').empty(); // Clear existing fields
+                    $('.price-fields').empty(); // Clear existing fields
 
-                                                if (itemTypes[foodType]) {
-                                                    var prices = JSON.parse(itemTypes[foodType]);
+                    if (itemTypes[foodType]) {
+                        var prices = JSON.parse(itemTypes[foodType]);
 
-                                                    prices.forEach(function (price, index) {
-                                                        var label = price + ' Price';
-                                                        var inputName = index === 0 ? 'small_price' : (index === 1 ? 'medium_price' : 'large_price');
-                                                        var inputField = '<div class="form-group">' +
-                                                                            '<label class="form-control-label">' + label + '</label>' +
-                                                                            '<input class="form-control" type="text" name="' + inputName + '"placeholder="Enter ' + label + '">' +
-                                                                        '</div>';
-                                                        $('.price-fields').append(inputField);
-                                                    });
+                        prices.forEach(function(price, index) {
+                            var label = price + ' Price';
+                            var inputName = index === 0 ? 'small_price' : (index === 1 ?
+                                'medium_price' : 'large_price');
+                            var inputField = '<div class="form-group">' +
+                                '<label class="form-control-label">' + label + '</label>' +
+                                '<input class="form-control" type="text" name="' + inputName +
+                                '"placeholder="Enter ' + label + '">' +
+                                '</div>';
+                            $('.price-fields').append(inputField);
+                        });
 
-                                                    $('.price-fields').show();
-                                                } else {
-                                                    $('.price-fields').hide();
-                                                }
-                                            });
-                                        });
-                                    </script>
+                        $('.price-fields').show();
+                    } else {
+                        $('.price-fields').hide();
+                    }
+                });
+            });
+        </script>
     @endsection

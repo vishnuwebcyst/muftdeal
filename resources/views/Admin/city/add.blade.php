@@ -10,12 +10,15 @@
                 <div class="row">
                     <div class="card  px-5 mx-auto">
                         <h4 class='text-center py-4'>Add New City</h4>
-                        <form action="{{ route('all-city.store') }}" class="col-lg-8 mx-auto" method='post'
-                            enctype="multipart/form-data">
+                        <form action="{{ route('all-city.store') }}" class="col-lg-8 mx-auto" method='post' enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="example-url-input" class="form-control-label">City Name</label>
                                 <input class="form-control" type="text" name="city_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="example-url-input" class="form-control-label">City Image</label>
+                                <input class="form-control" type="file" name="image">
                             </div>
 
                             <button type="submit" class='btn btn-success'>Add</button>

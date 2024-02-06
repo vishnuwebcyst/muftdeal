@@ -79,6 +79,10 @@
                                 <label for="example-url-input" class="form-control-label">URL</label>
                                 <input class="form-control" type="text" name="url" value="{{ $data->url }}">
                             </div>
+                            <div class="form-group">
+                                <label for="example-email-input" class="form-control-label">Enter Description</label>
+                                <textarea class="form-control" type="text" name="description" >{{ $data->description }}</textarea>
+                            </div>
                             <button type="submit" class='btn btn-success'>Update</button>
 
                         </form>
