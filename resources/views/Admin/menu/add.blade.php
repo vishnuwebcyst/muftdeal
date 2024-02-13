@@ -38,6 +38,20 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
+                                        <label for="food_id" class="form-control-label">Slect Tax (%)</label>
+                                        <select class="form-select shadow-none" id="gst" name="gst" aria-label="Default select example" >
+                                            <option disabled selected>Select Tax (optional)</option>
+
+                                                {{-- <option value="18">18</option> --}}
+                                                <option value="5"> 5 %</option>
+                                                <option value="12"> 5 %</option>
+                                                <option value="18">18 %</option>
+                                                <option value="18">28 %</option>
+
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
                                         <label for="example-search-input" class="form-control-label">Product Name</label>
                                         <input class="form-control" type="text" name="item_name"
                                             placeholder="Enter item name" required>
@@ -45,6 +59,7 @@
                                             <small class="text-danger">{{ $errors->first('item_name') }}</small>
                                         @endif
                                     </div>
+
 
                                     <div class="price-fields" style="display: none;">
                                     </div>

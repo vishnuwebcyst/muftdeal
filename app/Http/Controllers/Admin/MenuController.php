@@ -60,6 +60,8 @@ class MenuController extends Controller
         $data = new Menu();
         $data->restaurant_id = $request->restaurant_id;
         $data->item_name = $request->item_name;
+        $data->gst = $request->gst;
+
         $data->small_price = $request->small_price;
         $data->medium_price = $request->medium_price;
         $data->large_price = $request->large_price;
@@ -112,6 +114,8 @@ class MenuController extends Controller
         $menu::where('id', $menu->id)->update([
             'restaurant_id' => $request->restaurant_id,
             'item_name' => $request->item_name,
+            'gst' => $request->gst,
+
             'small_price' => $request->small_price,
             'medium_price' => $request->medium_price,
             'large_price' => $request->large_price,
@@ -160,9 +164,12 @@ class MenuController extends Controller
 
         $item_types = itemType::with('menu_items')->where('restaurant_id', $data->id)->get();
 
-        $menu = Menu::where('restaurant_id', $data->id)->orderBy('id', 'asc')->get();
-        $foodTypes = food_type::where('restaurant_id', $data->id)->get();
+        $menu = Menu::where('restaurant_id', $data->id)->get();
+        // $foodTypes = food_type::where('restaurant_id', $data->id)->get();
+        $foodTypes = food_type::where('restaurant_id', $data->id)->orderBy('position', 'asc')->get();
+
         $menuGrouped = $menu->groupBy('food_id');
+
 
         $menubackground = background::orderBy('id')->get();
 

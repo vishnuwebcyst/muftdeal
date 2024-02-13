@@ -25,11 +25,11 @@ class StoreBillingsRequest extends FormRequest
     {
         return [
             //
-'customer_name' => 'required',
-'customer_phone' => 'required',
-'product_id' => 'required',
-'qty' => 'required',
-'variant_type' => 'required',
+// 'customer_name' => 'required',
+// 'customer_phone' => 'required',
+// 'product_id' => 'required',
+// 'qty' => 'required',
+// 'variant_type' => 'required',
         ];
     }
 }

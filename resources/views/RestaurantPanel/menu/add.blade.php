@@ -22,6 +22,8 @@
                             <div class=" col-lg-8 col-12 mx-auto">
                                 <form action="{{ route('restaurant-menu.store') }}" method="post" class="px-3" enctype="multipart/form-data">
                                     @csrf
+
+
                                     <input class="form-control" type="hidden" name="restaurant_id" value="{{ $restaurant_id }}">
 
                                     <div class="form-group">
@@ -36,9 +38,23 @@
                                             <small class="text-danger">{{ $errors->first('food_id') }}</small>
                                         @endif
                                     </div>
+                                    <div class="form-group">
+                                        <label for="food_id" class="form-control-label">Slect Tax (%)</label>
+                                        <select class="form-select shadow-none" id="gst" name="gst" aria-label="Default select example" >
+                                            <option disabled selected>Select Tax (optional)</option>
+
+                                                {{-- <option value="18">18</option> --}}
+                                                <option value="5"> 5 %</option>
+                                                <option value="12"> 5 %</option>
+                                                <option value="18">18 %</option>
+                                                <option value="18">28 %</option>
+
+                                        </select>
+
+                                    </div>
 
                                     <div class="form-group">
-                                        <label for="item_name" class="form-control-label">Product  Name</label>
+                                        <label for="item_name" class="form-control-label">Product Name</label>
                                         <input class="form-control" type="text" name="item_name" placeholder="Enter Product Name">
                                         @if ($errors->has('item_name'))
                                             <small class="text-danger">{{ $errors->first('item_name') }}</small>

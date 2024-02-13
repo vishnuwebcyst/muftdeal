@@ -1,11 +1,6 @@
 @extends('layouts.restaurant')
 
 @section('content')
-    <style>
-        .table_width {
-            white-space: break-spaces !important;
-        }
-    </style>
 
     <body class="g-sidenav-show bg-gray-100">
         <div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -31,45 +26,40 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Customer Name</th>
-                                        <th>Customer Phone Number</th>
+                                        <th> Phone Number</th>
 
                                         <th>Sub Price</th>
-                                        <th>GST Amount</th>
+                                        <th>GST (%)</th>
                                         <th>Discount Amount</th>
                                         <th>Total Price</th>
 
+                                        <th>Action</th>
                                         <th>Date</th>
-                                        <th>View Invoice</th>
                                      </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($data as $key => $restaurant)
-                                        @php
-                                            $dataa = $restaurant->restaurant_id;
-                                        @endphp
+                                <tbody class='text-center'>
+                                    @foreach ($data as $key => $billing)
+
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $restaurant->customer_name }}</td>
-                                            <td class="table_width">{{ $restaurant->customer_phone }}</td>
-                                            {{-- <td class="table_width">{{ dd($restaurant->billing_items->unit_price) }}</td> --}}
-                                            {{-- <td>
-                                            @foreach ($restaurant->billing_items as $billingItem)
-                                            <p> {{ $billingItem->unit_price }}</p>
-                                         @endforeach
-                                            </td> --}}
+                                            <td>{{ $billing->customer_name }}</td>
+                                            <td>{{ $billing->customer_phone }}</td>
 
-                                            <td>{{ $restaurant->sub_total }}</td>
-                                            <td>{{ $restaurant->gst }}</td>
-                                            <td>{{ $restaurant->discount }}</td>
-                                            <td>{{ $restaurant->total }}</td>
-                                            <td>{{$restaurant->created_at}}</td>
-                                            <td><a href='{{route('restaurant.invoice', [$restaurant->id])}}' class='btn btn-primary' target="_blank">View Invoice</td>
+
+                                            <td>
+
+                                                {{ $billing->grand_total }}</td>
+                                            <td>{{ $billing->gst }}</td>
+                                            <td>{{ $billing->discount }}</td>
+                                            <td>{{  $billing->total  }}</td>
+                                            <td><a href='{{route('restaurant.invoice', [$billing->id])}}' class='btn btn-primary' target="_blank">View</td>
+                                                <td>{{$billing->created_at}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             <div class="pagination">
-
+{{$data->links()}}
                              </div>
                         </div>
                     </div>

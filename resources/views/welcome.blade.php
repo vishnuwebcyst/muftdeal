@@ -26,7 +26,7 @@
         .inner-img {
 
             object-fit: contain;
-            /* aspect-ratio: 1/1 !important; */
+            aspect-ratio: 1/1 !important;
             transition: .5s;
             width: 100%;
         }

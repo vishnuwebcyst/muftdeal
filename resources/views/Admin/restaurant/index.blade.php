@@ -5,6 +5,65 @@
         .table_width {
             white-space: break-spaces !important;
         }
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 20px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(18px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
     </style>
 
     <body class="g-sidenav-show bg-gray-100">
@@ -36,6 +95,7 @@
                                         <th>Password</th>
                                         <th>Add Menu </th>
                                         <th>Offers</th>
+                                        <th>Billing</th>
                                         <th>Edit</th>
                                         <th>Date</th>
                                     </tr>
@@ -68,6 +128,7 @@
                                                 <a class="btn btn-primary mx-2 " data-bs-toggle="modal" data-bs-target="#add_offer{{ $restaurant->id }}">
                                                    offers
                                                 </a>
+
                                                 <div class="modal fade"id="add_offer{{ $restaurant->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
                                                         <div class="modal-content">
@@ -111,6 +172,22 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>
+                                                {{-- <label class="switch">
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider round"></span>
+                                                  </label> --}}
+                                                  <form action='{{ route('restaurant.billing', [$restaurant->id]) }}' method='post'>
+                                                     @csrf
+
+                                                      @if($restaurant->billing == 'on')
+                                                      <button type='submit' class='btn btn-danger '>Off</button>
+                                                      @else
+                                                      <button type='submit' class='btn btn-primary '>On</button>
+                                                      @endif
+                                                    </form>
+
+                                                </td>
                                             <td>
                                                 <div class='d-flex'><a
                                                         href="{{ route('restaurant.edit', [$restaurant->id]) }}" class=''><i class="fas fa-edit"></i></a>

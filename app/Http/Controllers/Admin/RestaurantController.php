@@ -11,6 +11,7 @@ use App\Models\restaurant;
 use App\Models\Menu;
 use App\Models\City;
 use App\Models\background;
+use Carbon\Carbon;
 use App\Models\itemType;
 use App\Models\food_type;
 use App\Http\Requests\StorerestaurantRequest;
@@ -267,4 +268,28 @@ $restaurantId = $request->restauran_id;
         ]);
         return redirect()->route('restaurant.index')->with('success', 'Restaurent Added Successfully');
     }
+    public function billing(Request $request, $id){
+
+
+        $restaurant = restaurant::where('id' ,$id)->first();
+$billing_date =  Carbon::now();
+
+        if($restaurant->billing == 'on'){
+            restaurant::where('id', $id)->update([
+                'billing' => 'off',
+                'billing_date' => $billing_date,
+
+             ]);
+            return redirect()->back()->with('success', 'Billing off successfully');
+        }else{
+            restaurant::where('id', $id)->update([
+                'billing' => 'on',
+                'billing_date' => $billing_date,
+            ]);
+
+            return redirect()->back()->with('success', 'Billing on successfully');
+        }
+
+
+}
 }

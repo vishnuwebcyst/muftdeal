@@ -1,21 +1,29 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
     <title>Muft Deal</title>
+
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
-<style>
-    /* reset */
-    body {
-        width: 600px !important;
 
+<style>
+    body {
+        width: 100% !important;
+        padding: 3px;
     }
+
+    .border-top {
+        border-top: 1px solid black !important;
+    }
+
 
     * {
         border: 0;
@@ -35,65 +43,65 @@
     }
 
 
-    h1 {
+    h2 {
         font: bold 100% sans-serif;
-        letter-spacing: 0.5em;
+        letter-spacing: 0.1em;
         text-align: center;
         text-transform: uppercase;
+        background-color: #FFF;
+        font-size: 24px !important;
     }
 
-    /* table */
+    h6 {
+        font: bold 100% sans-serif;
+        text-align: center;
+        font-size: 13px !important;
+
+    }
 
     table {
-        font-size: 75%;
-        table-layout: fixed;
+        font-size: 100%;
         width: 100%;
-    }
-
-    table {
-        border-collapse: separate;
-        border-spacing: 2px;
-    }
-
-    th,
-    td {
-        border-width: 1px;
-        padding: 0.5em;
-        position: relative;
-        text-align: left;
     }
 
 
 
     th {
-        background: #EEE;
-        border-color: #BBB;
         font-weight: bold;
+        position: relative;
+        text-align: left;
+        font-size: 19px;
+
     }
 
     td {
-        border-color: #DDD;
+        position: relative;
+        text-align: left;
+        font-size: 22px;
+
     }
 
-    /* page */
 
+    thead tr {
+        border-top: 2px solid black !important;
+        border-bottom: 2px solid black !important;
+    }
+
+    .margin {
+        padding-bottom: 35px !important;
+    }
+
+    .padding-1 {
+        padding: left 12px, i !important;
+    }
 
     body {
         box-sizing: border-box;
-        height: 11in;
         margin: 0 auto;
-        padding: 0.5in;
-        width: 8.5in;
-    }
-
-    body {
         background: #FFF;
         border-radius: 1px;
         box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     }
-
-    /* header */
-
 
     header:after {
         clear: both;
@@ -178,24 +186,30 @@
     table.meta,
     table.balance {
         float: right;
-        width: 36%;
+        width: 70%;
+
     }
 
     table.meta:after,
     table.balance:after {
         clear: both;
         content: "";
-        display: table;
+
     }
+    @media print {
+  .print_btn{
+    display:none;
+  }}
 </style>
 </head>
 
-<body>
-    <header>
-        <h4 class='text-center m-0'>Tax Invoice</h4>
-        <h2 class='text-center m-0 text-uppercase'>{{ $restaurant->restaurant_name }}</h2>
-        <p class='text-center m-0'>{{ $restaurant->location }}</p>
-        <p class='text-center m-0'>{{ $restaurant->phone }}</p>
+<body style='width:400px;margin:auto'>
+    <button class='print_btn btn btn-primary' onclick='window.print()'>Print Now</button>
+    <header class="mt-3">
+        <h4 class='text-center mb-1'>Tax Invoice</h4>
+        <h2 class='text-center m-0 text-uppercase'><em>{{ $restaurant->restaurant_name }}</em></h2>
+        <h4 class='text-center m-0'>{{ $restaurant->location }}</h4>
+        <h4 class='text-center m-0'>{{ $restaurant->phone }}</h4>
         <address>
 
             {{-- <h2>{{ $data['customer_name'] }}</h2>
@@ -206,7 +220,7 @@
     <article>
         <table class="meta">
             <tr>
-                <th> Invoice No </th>
+                <th> Invoice No : </th>
 
 
                 @foreach ($data as $key => $product_id)
@@ -217,7 +231,7 @@
 
             </tr>
             <tr>
-                <th> Date </th>
+                <th> Date :</th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
                         <td>{{ $product_id->created_at->format('Y-m-d  ') }}</td>
@@ -228,106 +242,124 @@
 
         </table>
         <br><br><br><br>
-        <table class="inventory">
+        <table class="inventory p-2">
             <thead>
                 <tr>
-                    <th>Product Name</th>
-                    <th width='40'>Qty</th>
-                    <th width='40'>Rate</th>
-                    <th width='40'>GST (%)</th>
-                    <th width='45'>Amount</th>
+                    <th width='100'>Products</th>
+                    <th width='55'>Qty</th>
+                    <th width='70'>Rate</th>
+                    <th width='80'>GST(%)</th>
+                    <th width='85'>Amount</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($data as $key => $product_id)
                     <tr>
-                        <td> {{ $product_id->product_id }} </td>
+                        <td class='d-flex'> {{ $product_id->product_id }} </td>
                         <td>{{ $product_id->quantity }} </td>
                         <td>{{ $product_id->unit_price }} </td>
-                        {{-- <td>{{ $product_id->product_gst }} </td> --}}
-                        <td>{{  $product_id->product_gst}} </td>
-                        <td>{{ $product_id->sub_total  }} </td>
+                        <td>{{ $product_id->product_gst }} </td>
+                        <td>{{ $product_id->sub_total * $product_id->quantity }} </td>
 
 
                     </tr>
                 @endforeach
+                <tr>
+
+
+                </tr>
 
 
             </tbody>
         </table>
-        <table class="balance" style='float:right'>
-            <tr>
-                <th> <b>Sub Total</b></th>
+        <table class="balance text-end">
 
+
+            <tr class="border-top  border-dark ">
+                <th width='55' class="text-end"> Sub total : </th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
-                        <td> {{ $product_id->grand_total}}</td>
+                        <td class="text-end pe-5 "> {{ $product_id->grand_total   }}</td>
                     @endif
                 @endforeach
             </tr>
 
             <tr>
-                <th width='50'> CGST<b></b> </th>
+                <th width='50' class="text-end"> CGST : </th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
-                        {{-- <td> {{ $product_id->cgst  }}</td> --}}
-                        <td> {{  ($product_id->cgst * $product_id->grand_total) / 100  }}</td>
-
+                        <td class="text-end pe-5"> {{ $product_id->cgst  }}</td>
+                        {{-- <td class="text-end pe-5 "> {{ round(($product_id->cgst * $product_id->grand_total) / 100) }}</td> --}}
                     @endif
                 @endforeach
             </tr>
             <tr>
-                <th width='50'> SGST<b></b> </th>
+                <th width='50' class="text-end "> SGST : </th>
                 @foreach ($data as $key => $product_id)
-
-
                     @if ($key === 0)
+                    @php
+
+                        $sgst = $product_id->sgst;
+                        $cgst = $product_id->cgst;
+                    @endphp
                         {{-- <td> {{ $product_id->sgst  }}</td> --}}
-                        <td> {{  ($product_id->sgst * $product_id->grand_total) / 100  }}</td>
+                        <td class="text-end pe-5 "> {{ $sgst }}</td>
+                    @endif
+                @endforeach
+            </tr>
+            <tr class="border-top">
+                <th class="text-end  "> Total : </th>
+                @foreach ($data as $key => $product_id)
+                    @if ($key === 0)
+                        <td class="text-end pe-5 "> {{ $product_id->grand_total + $cgst + $sgst  }}</td>
                     @endif
                 @endforeach
             </tr>
             <tr>
-                <th> <b> Total</b> </th>
+                <th class="text-end"> Discount: </th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
-                        <td> {{ $product_id->total +  $product_id->discount }}</td>
+                        <td class="text-end pe-5 "> {{ $product_id->discount }}</td>
                     @endif
                 @endforeach
             </tr>
-            <tr>
-                <th> <b>Discount</b></th>
+            <tr class='  '>
+                <th  class=" text-end"> Charges : </th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
-                        <td> {{ $product_id->discount }}</td>
+                        <td class="text-end pe-5  "> {{ $product_id->extra_charges }}</td>
                     @endif
                 @endforeach
             </tr>
-            <tr>
-                <th> <b>Grand Total</b> </th>
+            <tr class='border-top'>
+                <th   class=" text-end" style='width:200px;'>  Grand Total :  </th>
                 @foreach ($data as $key => $product_id)
                     @if ($key === 0)
-                        <td> {{ $product_id->total }}</td>
+                    @php
+$sub_total = $product_id->total  + $product_id->extra_charges
+                    @endphp
+                        <td class="text-end pe-5  "> {{$product_id->total  }}</td>
                     @endif
                 @endforeach
             </tr>
+
         </table>
 
     </article>
     @foreach ($data as $key => $product_id)
         @if ($key === 0)
-            <h5 class='text-uppercase'> {{ $product_id->customer_name }}</h5>
+            <h3 class='text-uppercase'> {{ $product_id->customer_name }}</h3>
         @endif
     @endforeach
     @foreach ($data as $key => $product_id)
         @if ($key === 0)
-            <p>Rupees
+            <h4>Rupees
                 {{ ucfirst(\NumberFormatter::create('en_US', \NumberFormatter::SPELLOUT)->format($product_id->total)) }}
-                only</p>
+                only</h4>
         @endif
     @endforeach
-    <h4>Thankyou</h4>
+    <h3><b>Thankyou</b></h3>
 
 </body>
 

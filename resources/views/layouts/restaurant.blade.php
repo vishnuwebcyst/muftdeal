@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" type="image/png" href="{{ asset('admin/img/fav.png') }}">
     <title> Muft Deal </title>
@@ -78,8 +79,7 @@
             });
         </script>
     @endif
-    <aside
-        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
         id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -120,13 +120,7 @@
                                     <span class="nav-link-text ms-1">Edit Restaurant</span>
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('restaurant-menu.create' ) }}">
 
-                                    <span class="nav-link-text ms-1">Add Product</span>
-                                </a>
-                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('view') }}">
                                     <span class="nav-link-text ms-1">View Menu</span>
@@ -148,9 +142,16 @@
                         </ul>
                     </div>
                 </li>
+                @if(auth()->guard('restaurant')->user()->billing == 'on')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('billing.index') }}">
                         <i class="fas fa-file-invoice"></i><span class="nav-link-text ms-1">Billing</span>
+                    </a>
+                </li>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('bank-details.index') }}">
+                        <i class="fas fa-file-invoice"></i><span class="nav-link-text ms-1">Bank Details</span>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -2,6 +2,7 @@
 
 
 @section('content')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
@@ -55,10 +56,11 @@
                                                                     @csrf
                                                                     <div class='mb-3'>
                                                                         <label for="offers">Enter Valid Offers</label>
-                                                                        <input name="offers" type='text'
+                                                                        <textarea name='offers' type='text' class='form-control'>{{$restaurant->offers}}</textarea>
+                                                                        {{-- <input name="offers" type='text'
                                                                             class='form-control'
                                                                             value='{{ $restaurant->offers }}'
-                                                                            placeholder="Enter Offer">
+                                                                            placeholder="Enter Offer"> --}}
                                                                     </div>
                                                                     <button type="submit" class="btn btn-primary">Add
                                                                         Offers</button>
@@ -310,6 +312,7 @@
 
                         context.drawImage(qrCodeImage, marginLeft, marginTop, qrCodeWidth, qrCodeHeight);
 
+
                         context.font = '15px Arial';
                         context.fillStyle = 'white';
                         context.fillText(additionalLink, 10, 170);
@@ -321,10 +324,17 @@
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
+
+
                     };
                 });
             }
         </script>
+
+
+
+
+
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @endsection

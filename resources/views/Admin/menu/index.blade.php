@@ -50,7 +50,7 @@
                                     <div class=" row  py-3 border-bottom">
                                         <div class="col-lg-6 mx-auto ">
                                             <ul>
-                                                <h5><span class='pe-3'> {{ $key + 1 }}</span> Food Name :
+                                                <h5><span class='pe-3'> {{ $key + 1 }}</span> Product  Name :
                                                     <b>{{ $data->item_name }} </b>
                                                 </h5>
 
@@ -114,12 +114,25 @@
                                                                     value="{{ $data->id }}">
 
                                                                 <div>
-                                                                    <label>Food Name</label>
+                                                                    <label>Product Name</label>
                                                                     <div class="input-group mb-3">
                                                                         <input type="text" name="item_name"
                                                                             class="form-control"
                                                                             value="{{ $data->item_name }}">
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="food_id" class="form-control-label">Slect Tax (%)</label>
+                                                                     <select class="form-select shadow-none" id="gst" name="gst" aria-label="Default select example" >
+                                                                        <option  >Select Tax (optional)</option>
+
+                                                                            <option value="5"  @if ($data->gst == 5) selected @endif>5%</option>
+                                                                            <option value="12"  @if ($data->gst == 12) selected @endif>12%</option>
+                                                                            <option value="18"   @if ($data->gst == 18) selected @endif>18 %</option>
+                                                                            <option value="18"  @if ($data->gst == 28) selected @endif>28 %</option>
+
+                                                                    </select>
+
                                                                 </div>
                                                                 @if (isset($data->small_price))
                                                                     <div>

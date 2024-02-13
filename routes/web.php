@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\CityController as AdminCityController;
 use App\Http\Controllers\Admin\ItemTypeController;
 use App\Http\Controllers\Admin\MenuItemsController;
 use App\Http\Controllers\Admin\FoodTypeController;
+use App\Http\Controllers\RestaurantPanel\BankDetailsController;
 use App\Http\Controllers\Front\RatingController;
 use App\Http\Controllers\RestaurantPanel\BillingsController;
 use App\Http\Controllers\RestaurantPanel\RestaurantItem;
@@ -81,6 +82,9 @@ Route::prefix('restaurant-panel')->middleware('restaurant_check')->group(functio
     Route::post('remove_background', [RestaurantMenu::class, 'remove_background'])->name('restaurant.remove_background');
     Route::resource('billing', BillingsController::class);
     Route::get('invoice/{id}', [BillingsController::class, 'invoice'])->name('restaurant.invoice');
+    Route::resource('bank-details', BankDetailsController::class);
+
+
 
 
 });
@@ -113,5 +117,6 @@ Route::prefix('admin')->middleware(['admin_login_check', 'is_admin'])->group(fun
     });
     Route::post('admin_offer/{id}', [RestaurantController::class, 'admin_offer'])->name('admin.offers');
     Route::post('admin_offer_delete/{id}', [RestaurantController::class, 'admin_offer_delete'])->name('admin.offer_delete');
+    Route::post('billing/{id}', [RestaurantController::class, 'billing'])->name('restaurant.billing');
 
 });

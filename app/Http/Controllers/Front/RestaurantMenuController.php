@@ -10,6 +10,7 @@ use App\Models\Menu;
 use App\Models\restaurant;
 use App\Models\Slider;
 use App\Models\itemType;
+use App\Models\BankDetails;
 use App\Models\food_type;
 use App\Models\Rating;
 use App\Models\User;
@@ -78,31 +79,31 @@ class RestaurantMenuController extends Controller
         if (auth()->check()) {
             $rating = Rating::where('restaurant_id', $ide)->first();
         }
-         $data = restaurant::with('background')->find($ide);
+        $data = restaurant::with('background')->find($ide);
         if (!$data) {
             return abort(404);
         }
         $menu = Menu::where('restaurant_id', $data->id)->when($request->search, function ($q) use ($request) {
             $q->where("item_name", "like", "%$request->search%")
-            ->orWhere("small_price", "like", "%$request->search%")
-            ->orWhere("medium_price", "like", "%$request->search%")
-            ->orWhere("large_price", "like", "%$request->search%");
+                ->orWhere("small_price", "like", "%$request->search%")
+                ->orWhere("medium_price", "like", "%$request->search%")
+                ->orWhere("large_price", "like", "%$request->search%");
         })->get();
 
-            $menu->rating  = '';
-            if($rating != null ){
-                $menu->rating  = $rating->rating;
+        $menu->rating  = '';
+        if ($rating != null) {
+            $menu->rating  = $rating->rating;
+        }
 
-
-            }
-
-         $foodTypes = food_type::where('restaurant_id', $data->id)->orderBy('position', 'asc')->get();
-         $menuGrouped = $menu->groupBy('food_id');
+        $foodTypes = food_type::where('restaurant_id', $data->id)->orderBy('position', 'asc')->get();
+        $menuGrouped = $menu->groupBy('food_id');
         $item_types = itemType::with('menu_items')->where('restaurant_id', $data->id)->get();
         $menubackground = background::orderBy('id')->get();
         $sliders = Slider::where('restaurant_id', $data->id)->get();
-$reviews = Rating::where('restaurant_id', $ide)->get();
-          return view('front-end.RestaurantFood.index', compact('menu', 'data', 'menubackground', 'sliders', 'item_types', 'foodTypes', 'menuGrouped', 'reviews'));
+        $reviews = Rating::where('restaurant_id', $ide)->get();
+
+        $bank_details = BankDetails::where('restaurant_id', $data->id)->first();
+        return view('front-end.RestaurantFood.index', compact('menu', 'data', 'menubackground', 'sliders', 'item_types', 'foodTypes', 'menuGrouped', 'reviews', 'bank_details'));
     }
 
     /**
@@ -138,6 +139,4 @@ $reviews = Rating::where('restaurant_id', $ide)->get();
     {
         //
     }
-
-
 }

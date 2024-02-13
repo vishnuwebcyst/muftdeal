@@ -78,6 +78,19 @@
                                                                         class="form-control"
                                                                         value="{{ $data->item_name }}">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="food_id" class="form-control-label">Slect Tax (%)</label>
+
+                                                                    <select class="form-select shadow-none" id="gst" name="gst" aria-label="Default select example" >
+                                                                        <option  >Select Tax (optional)</option>
+
+                                                                            <option value="5"  @if ($data->gst == 5) selected @endif>5%</option>
+                                                                            <option value="18"   @if ($data->gst == 18) selected @endif>18 %</option>
+                                                                            <option value="18"  @if ($data->gst == 28) selected @endif>28 %</option>
+
+                                                                    </select>
+
+                                                                </div>
                                                                 @if(isset($data->small_price))
                                                                 <label>Small Price</label>
                                                                 <div class="input-group mb-3">

@@ -60,7 +60,7 @@ class LoginController extends Controller
              return redirect()->route('restaurant-home.index');
         }
          else {
-             return redirect()->back()->withErrors(['phone' => 'Phone number or password is invalid']);
+             return redirect()->back()->with('error', 'Phone number or password is invalid');
         }
 
     }

@@ -76,6 +76,7 @@ class MenuController extends Controller
         $data->medium_price = $request->medium_price;
         $data->large_price = $request->large_price;
         $data->food_id = $request->food_id;
+        $data->gst = $request->gst;
         $data->save();
 
 
@@ -95,7 +96,7 @@ class MenuController extends Controller
         //
 
         $data = restaurant::with('background')->find($id);
-        $menu = Menu::where('restaurant_id', $data->id)->orderBy('id', 'asc')->paginate(10);
+        $menu = Menu::where('restaurant_id', $data->id)->orderBy('id', 'asc')->paginate(50);
 
 
 
@@ -146,6 +147,7 @@ class MenuController extends Controller
         }
         Menu::where('id', $id)->update([
             'item_name' => $request->item_name,
+            'gst' => $request->gst,
             'small_price' => $request->small_price,
             'medium_price' => $request->medium_price,
             'large_price' => $request->large_price,

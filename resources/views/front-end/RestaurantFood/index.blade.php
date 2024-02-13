@@ -136,6 +136,7 @@
                             <div class="">
                                 <div class=" px-lg-5 px-sm-0 px-md-2 ">
                                     <div class="   px-sm-0 px-md-2 py-3 ">
+
                                         @if (isset($data->offers))
                                             <span class='h4 border-bottom'>Offers</span>
                                             <marquee width="100%" direction="left" height="100px" class='h4 text-danger'>
@@ -166,13 +167,17 @@
                                         <p class="text-center restaurant_name  fs-3 m-0 ">For order call now :
                                             {{ $number }} </p>
 
+
+
                                             <p class='text-center   fs-5 '>Opening Time : {{ $data->open_time }} to
                                                 {{ $data->close_time }}</p>
 
 
                                         <div class="text-center">
                                             <a href="tel:+91 {{ $number }}" class="btn head-btn fw-bold">call now</a>
+
                                         </div>
+
                                         @endif
                                     </div>
                                     <form action="" method="get" class='col-sm-12 col-lg-6 px-2 mx-auto'>
@@ -231,9 +236,12 @@
                                                     @endif
                                                 @endforeach
                                             </tbody>
-
                                         </table>
                                     </div>
+
+                                    @if(isset($bank_details))
+                                <a href="upi://pay?pa={{$bank_details->upi_id}}" class='btn head-btn'>Pay Now</a>
+                                @endif
                                     <div class="py-5 text-center">
                                         @if(isset($data->description))
                                         <h4 class='text-start'>Description : {{ $data->description }}</h4>

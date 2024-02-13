@@ -28,7 +28,7 @@ class BillingsController extends Controller
         //
         $restaurant_id = auth()->guard('restaurant')->user()->id;
 
-        $data = Billings::Where('restaurant_id', $restaurant_id)->orderBy('id')->with('billingItems')->get();
+        $data = Billings::Where('restaurant_id', $restaurant_id)->orderBy('id', 'desc')->with('billingItems')->paginate(50);
 
         return view('RestaurantPanel.billing.index', compact('data'));
     }
@@ -57,43 +57,46 @@ class BillingsController extends Controller
     {
 
         $restaurant_id = auth()->guard('restaurant')->user()->id;
-
-
+        $totalGst = 0;
+        foreach($request->gst as $gst) {
+            $totalGst += $gst;
+        }
+// dd($request->all());
         $billing = new Billings();
         $billing->restaurant_id = $restaurant_id;
         $billing->customer_name = $request->customer_name;
         $billing->customer_phone = $request->customer_phone;
         $billing->invoice_number = time();
-        $billing->gst = $request->gst;
+        $billing->gst = $totalGst;
+        $billing->extra_charges = $request->extra_charges;
         $totalAmount = $request->total;
-        $gstPercentage = $request->gst;
-        $gstAmount = ($gstPercentage * $totalAmount) / 100;
+        // $gstPercentage = $request->gst;
+        //  $gstAmount = ($gstPercentage * $totalAmount) / 100;
         $discount = $request->discount;
         $totalAmount -= $discount;
         $billing->discount = $request->discount;
         $billing->cgst =   $request->cgst;
         $billing->sgst =   $request->sgst;
-        $billing->grand_total = $request->sub_total;
+        $billing->grand_total = $request->grand_total;
         $billing->total = $request->total;
         $billing->save();
 
-        $products = Menu::where('id', $request->product_id)->get();
-        $numberOfProducts = count($request->product_id);
-// $gstPercentage = $request->gst + ;
-// $gstPercentage = $request->gst *  $request->sub_total / 100 ;
+        // $products = Menu::where('id', $request->product_id)->get();
+        // $numberOfProducts = count($request->product_id);
+
 
 foreach ($request->product_id as $key => $product_id) {
-            $gstPerProduct = $gstPercentage / $numberOfProducts;
+            // $gstPerProduct = $gstPercentage / $numberOfProducts;
 
             $data = new BillingItems();
             $data->billing_id = $billing->id;
             $data->product_id = $product_id;
-            $data->product_gst = $request->gst;
+            $data->product_gst = $request->gst_percent[$key];
             $data->quantity = $request->qty[$key];
             $data->variant_type = $request->variant_type[$key];
             $data->unit_price = $request->product_price[$key];
-            $data->sub_total = $request->total_price[$key];
-            $data->total_price = $request->total;
+            $data->sub_total = $request->product_price[$key];
+            $data->total_price = $request->grand_total ;
             $data->save();
         }
 
@@ -101,14 +104,15 @@ foreach ($request->product_id as $key => $product_id) {
 
         $gstPercentage = $request->gst;
 
-        $gstAmount = ($gstPercentage * $totalAmount) / 100;
+        // $gstAmount = ($gstPercentage * $totalAmount) / 100;
         $dataa = BillingItems::join("billings","billing_items.billing_id","billings.id")->where("billing_items.billing_id",$billing->id)->get();
 
         $restaurant = auth()->guard('restaurant')->user();
-         $pdf = PDF::loadView('RestaurantPanel.billing.invoice', ['data' => $dataa,   'gst' => $gstAmount, 'restaurant' => $restaurant]);
+         $pdf = PDF::loadView('RestaurantPanel.billing.invoice', ['data' => $dataa,   'gst' => $totalGst, 'restaurant' => $restaurant]);
         $fileName = 'invoice_' . time() . '.pdf';
+               return $pdf->download($fileName);
 
-        return $pdf->download($fileName);
+
 
     }
 
@@ -162,10 +166,9 @@ foreach ($request->product_id as $key => $product_id) {
 
     $data =    BillingItems::join("billings","billing_items.billing_id","billings.id")->where("billing_items.billing_id",$id)->get();
 
-$gst = '1';
         $restaurant = auth()->guard('restaurant')->user();
 
-         return view('RestaurantPanel.billing.invoice', ['data' => $data, 'restaurant' => $restaurant, 'gst' => $gst]);
+         return view('RestaurantPanel.billing.invoice', ['data' => $data, 'restaurant' => $restaurant]);
 
     }
 }

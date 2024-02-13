@@ -148,9 +148,11 @@
                                     </select>
                                 </div>
                             </form> --}}
-                            <div class="left-inner-addon input-container px-3 d-block d-md-none  w-100"  data-bs-toggle="modal" data-bs-target="#review_modal" id='city_name'>
+                            <div class="left-inner-addon input-container px-3 d-block d-md-none  w-100"
+                                data-bs-toggle="modal" data-bs-target="#review_modal" id='city_name'>
 
-                                <div class=" form-control search_bar w-100 px-3 rouded-circle shadow-none" id='select_city_name_sm' onclick="cityFormMoblie()">
+                                <div class=" form-control search_bar w-100 px-3 rouded-circle shadow-none"
+                                    id='select_city_name_sm' onclick="cityFormMoblie()">
                                     {{-- {{session('city_name')?  : 'Select your city'}} --}}
 
                                 </div>
@@ -184,13 +186,15 @@
                             </ul>
 
                             @if (Request::is('/'))
-                            <div class=" left-inner-addon input-container px-3  d-flex d-none d-md-block">
+                                <div class=" left-inner-addon input-container px-3  d-flex d-none d-md-block">
 
-                                <div class=" form-control search_bar w-100 px-3 rouded-circle shadow-none " id='select_city_name'  data-bs-toggle="modal" data-bs-target="#review_modal" id='city_name'>
+                                    <div class=" form-control search_bar w-100 px-3 rouded-circle shadow-none "
+                                        id='select_city_name' data-bs-toggle="modal" data-bs-target="#review_modal"
+                                        id='city_name'>
 
+                                    </div>
                                 </div>
-                            </div>
-                                    {{-- <div class="left-inner-addon input-container px-3"  data-bs-toggle="modal" data-bs-target="#review_modal">
+                                {{-- <div class="left-inner-addon input-container px-3"  data-bs-toggle="modal" data-bs-target="#review_modal">
                                         <i class="fas fa-search"></i>
                                         <select class="form-select search_bar ps-5 rouded-circle shadow-none  "
                                             name="city" onchange="submitForm()">
@@ -209,9 +213,17 @@
                                     </div>
                                 @endif
                             @endif
-                            <a href="{{ route('restaurant-login') }}" class="btn head-btn mt-3 mt-md-0 fw-bold "><i
-                                    class="fas fa-mug-hot"></i>
-                                Restaurant Login</a>
+                            @if (isset(auth()->guard('restaurant')->user()->id))
+                                <a href="{{ route('restaurant-home.index') }}"
+                                    class="btn head-btn mt-3 mt-md-0 fw-bold">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            @else
+                                <a href="{{ route('restaurant-login') }}" class="btn head-btn mt-3 mt-md-0 fw-bold">
+                                    <i class="fas fa-mug-hot"></i> Restaurant Login
+                                </a>
+                            @endif
+
                         </div>
                     </div>
                 </nav>
@@ -255,13 +267,14 @@
                                 Us</a></p>
                     </div>
                     <div class="col-lg-4 col-md-4 mx-auto pt-3 pt-md-0">
-                         <p class="footer-links"><i class="fab fa-r-project"></i> +91 98880-49484</p>
+                        <p class="footer-links"><i class="fab fa-r-project"></i> +91 98880-49484</p>
                         <p class="footer-links"><i class="fas fa-envelope"></i> websystsoftware@gmail.com</p>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="modal modal-xl fade" id="review_modal" data-bs-backdrop="static"  tabindex="-1" aria-labelledby="review_modal_label" aria-hidden="true">
+        <div class="modal modal-xl fade" id="review_modal" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="review_modal_label" aria-hidden="true">
 
             <div class="modal-dialog ">
                 <div class="modal-content">
@@ -269,57 +282,66 @@
                         <input type="search" class='form-control' placeholder="Search for your city">
                     </div>
 
-                        <div class="modal-body">
-                            <p class='text-center'>Popular Cities</p>
-                            <div class="row">
-                                <div class="col">
-                                    <img class='city' data-city="Abohar" src="{{ asset('assets/images/ahd.png') }}" alt="">
-                                    <p class='text-center city' data-city="Abohar">Abohar</p>
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Amritsar" src="{{ asset('assets/images/bang.png') }}" alt="">
-                                    <p class='text-center city' data-city="Amritsar">Amritsar</p>
+                    <div class="modal-body">
+                        <p class='text-center'>Popular Cities</p>
+                        <div class="row">
+                            <div class="col">
+                                <img class='city' data-city="Abohar" src="{{ asset('assets/images/ahd.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Abohar">Abohar</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Amritsar" src="{{ asset('assets/images/bang.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Amritsar">Amritsar</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Ludhiana" src="{{ asset('assets/images/chd.png') }}" alt="">
-                                    <p class='text-center city' data-city="Ludhiana">Ludhiana</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Ludhiana" src="{{ asset('assets/images/chd.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Ludhiana">Ludhiana</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Chennai" src="{{ asset('assets/images/chen.png') }}" alt="">
-                                    <p class='text-center city' data-city="Chennai">Chennai</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Chennai" src="{{ asset('assets/images/chen.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Chennai">Chennai</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Hyderabad" src="{{ asset('assets/images/hyd.png') }}" alt="">
-                                    <p class='text-center city' data-city="Hyderabad">Hyderabad</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Hyderabad" src="{{ asset('assets/images/hyd.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Hyderabad">Hyderabad</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Kochi" src="{{ asset('assets/images/koch.jpeg') }}" alt="">
-                                    <p class='text-center city' data-city="Kochi">Kochi</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Kochi" src="{{ asset('assets/images/koch.jpeg') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Kochi">Kochi</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Kolkata" src="{{ asset('assets/images/kolk.png') }}" alt="">
-                                    <p class='text-center city' data-city="Kolkata">Kolkata</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Kolkata" src="{{ asset('assets/images/kolk.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Kolkata">Kolkata</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Mumbai" src="{{ asset('assets/images/mumbai.png') }}" alt="">
-                                    <p class='text-center city' data-city="Mumbai">Mumbai</p>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Mumbai" src="{{ asset('assets/images/mumbai.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Mumbai">Mumbai</p>
 
-                                </div>
-                                <div class="col">
-                                    <img class='city' data-city="Delhi" src="{{ asset('assets/images/ncr.png') }}" alt="">
-                                    <p class='text-center city' data-city="Delhi">Delhi-ncr</p>
-
-                                </div>
+                            </div>
+                            <div class="col">
+                                <img class='city' data-city="Delhi" src="{{ asset('assets/images/ncr.png') }}"
+                                    alt="">
+                                <p class='text-center city' data-city="Delhi">Delhi-ncr</p>
 
                             </div>
 
-                            {{-- <p class='text-center text-danger' id='view_all_city'>View all city</p>
+                        </div>
+
+                        {{-- <p class='text-center text-danger' id='view_all_city'>View all city</p>
                             <div class="row text-center" id='all_city' style='display:none'>
                                 <div class="col-lg-3 city" data-city="Lahore">Lahore</div>
                                 <div class="col-lg-3 city" data-city="Faisalabad">Faisalabad</div>
@@ -328,7 +350,7 @@
                                 <div class="col-lg-3 city" data-city="Sialkot">Sialkot</div>
                                 <p class='text-center text-danger' id='hide_all_city'>Hide all city</p>
                             </div> --}}
-                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -344,7 +366,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script>
-
         function submitForm() {
             $('#review_modal').modal('show');
         }
@@ -415,7 +436,6 @@
                 $(this).remove();
             });
         }, 2000);
-
     </script>
 
 </body>

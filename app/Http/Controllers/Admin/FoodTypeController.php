@@ -66,9 +66,9 @@ class FoodTypeController extends Controller
 
 
 
-        // return redirect()->back()->with('success', 'type addedd successfully');
+        return redirect()->back()->with('success', 'Category addedd successfully');
         // return redirect()->route('item-type.index', 'restaurant_id',$request->restaurant_id)->with('success', 'Type added successfully');
-        return redirect()->route('food-type.index', ['restaurant_id' => $request->restaurant_id])->with('success', 'Type added successfully');
+        // return redirect()->route('food-type.index', ['restaurant_id' => $request->restaurant_id])->with('success', 'Category added successfully');
     }
 
     /**

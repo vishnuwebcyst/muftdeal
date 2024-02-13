@@ -26,7 +26,9 @@
             background-position: center !important;
             background-repeat: no-repeat !important;
             height: 100vh !important;
-            background-image: url({{ asset('admin/img/restaurant-login.svg') }});
+            /* background-image: url({{ asset('admin/img/restaurant-login.svg') }}); */
+            background-image: url({{ asset('admin/img/liquid-cheese.svg') }});
+
         }
         .card {
             backdrop-filter: blur(5px);
@@ -59,7 +61,9 @@
             color: #333;
         }
         .text-color {
-    background-color: #FF0032 !important;
+    /* background-color: #FF0032 !important; */
+    background-color: #5e72e4 !important;
+
     color: white !important;
 }
 .col-form-label{
@@ -228,7 +232,7 @@
                                 <div class="col-md-12 text-center mx-auto">
                                     <button type="submit" class="btn text-color w-50 rounded-pill">Register</button>
                                 </div>
-                                <a href="{{ route('restaurant-login') }}" class="py-2 h5 text-center text-danger text-decoration-none">Already have an account? Log in</a>
+                                <a href="{{ route('restaurant-login') }}" class="py-2 h5 text-center text-dark text-decoration-none">Already have an account? Log in</a>
 
                              </div>
                         </form>

@@ -308,4 +308,6 @@ class RestaurantLoginController extends Controller
         // return redirect()->route('restaurant-home.index');
         return redirect()->back()->with('success', 'Requset Send to admin');
     }
+
+
 }
